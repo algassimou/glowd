@@ -1,21 +1,26 @@
-.PHONY: clean deps test docker
-
 EXECUTABLE ?= server
 IMAGE ?= glowd/frontend
 
-clean:
+go-clean:
 	go clean -i
 
-deps:
+go-deps:
 	go get -d -v
 
-test:
+go-test:
 	go test
 
-docker: build
-	docker build --rm -t $(IMAGE) .
+docker: go-build elm-build
+	docker build --no-cache --rm -t $(IMAGE) .
 
 $(EXECUTABLE): $(wildcard *.go)
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o $@
 
-build: $(EXECUTABLE)
+go-build: $(EXECUTABLE)
+
+
+elm-deps:
+	elm-package install -y
+
+elm-build:
+	elm-make elm/Main.elm --output ./assets/main.js

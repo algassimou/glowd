@@ -1,9 +1,19 @@
 <doctype html>
 <html>
+
   <head>
-    <title>GLowd</title>
+    <title>Glowd</title>
+    <script type="text/javascript" src="main.js"></script>
   </head>
+
   <body>
     <h1>Glowd</h1>
+    <div id="container"></div>
   </body>
+
+  <script type="text/javascript">
+    var container = document.getElementById('container');
+    Elm.embed(Elm.Main, container);
+  </script>
+
 </html>

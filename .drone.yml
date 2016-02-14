@@ -1,9 +1,14 @@
 build:
-  image: golang
-  commands:
-    - make deps
-    - make build
-    - make test
+  elm:
+    image: registry.polygon.duckdns.org:5000/elm
+    commands:
+      - make elm-deps
+      - make elm-build
+  go:
+    image: golang
+    commands:
+      - make go-deps
+      - make go-build
 
 publish:
   docker:
